@@ -1,0 +1,64 @@
+#! /bin/sh
+#
+# php-fpm - this script starts and stops the php-fpm daemon 
+#
+# chkconfig: - 85 15
+# description: PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI implementation
+#              with some additional features useful for sites of any size, especially busier sites.
+# processname: php-fpm                                                                                                                                            
+
+PROG="<%= @bin %>"
+CONF="<%= @conf %>"
+LOCKFILE="/var/log/php-fpm/lock"
+
+[ -f $CONF ] || exit 1
+
+# Source function library.                                                                                                                                         
+. /etc/init.d/functions
+
+RETVAL=0
+
+start() {
+    echo -n $"Starting $PROG:"
+    daemon $PROG -c $CONF
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && touch $LOCKFILE
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $PROG:"
+    killproc $PROG
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f $LOCKFILE
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    condrestart)
+        if [ -f $LOCKFILE ]; then
+            stop
+            start
+        fi
+        ;;
+    reload)
+        action $"Reloading $PROG:" killall -HUP $PROG
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
+        exit 1
+esac
+
+exit $RETVAL
