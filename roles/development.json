@@ -1,0 +1,22 @@
+{
+  "name": "development",
+  "json_class": "Chef::Role",
+  "run_list": [
+    "recipe[iptables::disable]",
+    "recipe[nginx]",
+    "recipe[nginx::vhost]"
+  ],
+  "default_attributes": {
+    "nginx": {
+      "user": "vagrant"
+    },
+    "php-fpm": {
+      "user": "vagrant",
+      "group": "vagrant"
+    },
+    "phalcon": {
+      "nginx_user": "vagrant",
+      "nginx_group": "vagrant"
+    }
+  }
+}

@@ -52,7 +52,7 @@ bash 'make_project' do
     cd #{pj_dir}
     #phalcon project #{pj_name} --type=#{pj_type} --enable-webtools
     phalcon project #{pj_name} --type=#{pj_type}
-    chown -R nginx:nginx #{node['phalcon']['project_name']}
+    chown -R #{node['phalcon']['nginx_user']}:#{node['phalcon']['nginx_group']} #{node['phalcon']['project_name']}
   EOL
 end
 
