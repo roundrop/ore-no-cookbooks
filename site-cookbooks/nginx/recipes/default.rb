@@ -1,3 +1,4 @@
+nginx_version = node['nginx']['version']
 nginx_user = node['nginx']['user']
 
 if "#{nginx_user}" != 'vagrant'
@@ -25,15 +26,15 @@ bash "install_nginx" do
   cwd "/tmp"
   flags "-e"
   code <<-EOH
-    rm -rf nginx-1.4.3.tar.gz
-    rm -rf nginx-1.4.3
+    rm -rf nginx-#{nginx_version}.tar.gz
+    rm -rf nginx-#{nginx_version}
     rm -rf pcre-8.32.tar.gz
     rm -rf pcre-8.32
-    wget http://nginx.org/download/nginx-1.4.3.tar.gz
-    tar zxf nginx-1.4.3.tar.gz
+    wget http://nginx.org/download/nginx-#{nginx_version}.tar.gz
+    tar zxf nginx-#{nginx_version}.tar.gz
     wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.32.tar.gz
     tar -xvf pcre-8.32.tar.gz
-    cd nginx-1.4.3
+    cd nginx-#{nginx_version}
     ./configure --prefix=/usr/local --conf-path=/etc/nginx/nginx.conf --user=nginx --group=nginx --with-pcre=/tmp/pcre-8.32
     make
     make install
