@@ -1,0 +1,20 @@
+{
+  "ntp": {
+    "servers": ["ntp.nict.jp", "ntp.jst.mfeed.ad.jp"],
+    "restrictions": ["192.168.1.0 mask 255.255.255.0 nomodify notrap"]
+  },
+  "run_list":[
+    "yum-epel", "yum-remi",
+    "vim",
+    "wget",
+    "git",
+    "zlib",
+    "role[development]",
+    "ruby::rbenv",
+    "php", "php::php-fpm",
+    "mysql", "mysql::grant_all",
+    "phalcon", "phalcon::nginx",
+    "postfix",
+    "fluentd"
+  ]
+}

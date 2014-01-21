@@ -1,4 +1,5 @@
 .DS_Store
 *.lock
 /nodes/*.json
+!/nodes/example.json
 /cookbooks/
