@@ -1,0 +1,21 @@
+{
+  "name": "production",
+  "json_class": "Chef::Role",
+  "run_list": [
+    "recipe[nginx]",
+    "recipe[nginx::vhost]"
+  ],
+  "default_attributes": {
+    "nginx": {
+      "user": "nginx"
+    },
+    "php-fpm": {
+      "user": "nginx",
+      "group": "nginx"
+    },
+    "phalcon": {
+      "nginx_user": "nginx",
+      "nginx_group": "nginx"
+    }
+  }
+}
