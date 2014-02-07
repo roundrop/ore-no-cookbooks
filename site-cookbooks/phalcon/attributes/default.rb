@@ -13,7 +13,7 @@ default['phalcon']['key_file'] = 'phalcon.test.com.key'
 
 default['phalcon']['db_host'] = '127.0.0.1'
 default['phalcon']['db_user'] = 'root'
-default['phalcon']['db_password'] = ''
+default['phalcon']['db_password'] = 'root'
 default['phalcon']['db_name'] = 'test'
 default['phalcon']['base_uri'] = '/'
 default['phalcon']['admin_ip'] = '10.0.2'

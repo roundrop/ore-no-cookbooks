@@ -18,6 +18,8 @@ default['mysql']['innodb_log_buffer_size']          = 16
 default['mysql']['innodb_log_file_size']            = '64M'
 default['mysql']['innodb_flush_log_at_trx_commit']  = 1
 
+default['mysql']['root_password']  = 'root'
+
 default['mysql']['version'] = '5.6'
 default['mysql']['install_rpms'] = [
   {

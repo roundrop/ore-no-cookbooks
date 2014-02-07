@@ -61,20 +61,27 @@ service 'mysql' do
   action [ :enable, :start ]
 end
 
+
+root_password = node['mysql']['root_password']
+
 package 'expect' do
   only_if 'ls /root/.mysql_secret'
   :install
 end
 
-cookbook_file '/tmp/password_set' do
-  only_if 'ls /root/.mysql_secret'
-	source "#{version}/password_set"
+template '/tmp/password_set.sh' do
+  user "root"
+  group "root"
+  source 'password_set.sh.erb'
+  variables ({
+    :root_password => root_password
+  })
 end
 
 execute 'password_set' do
   only_if 'ls /root/.mysql_secret'
 	user 'root'
-	command 'chmod +x /tmp/password_set && /tmp/password_set && rm -f /tmp/password_set'
+	command 'chmod +x /tmp/password_set.sh && /tmp/password_set.sh && rm -f /tmp/password_set.sh'
 end
 
 package 'expect' do

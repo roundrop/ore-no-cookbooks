@@ -2,9 +2,7 @@
   "name": "development",
   "json_class": "Chef::Role",
   "run_list": [
-    "recipe[iptables::disable]",
-    "recipe[nginx]",
-    "recipe[nginx::vhost]"
+    "recipe[iptables::disable]"
   ],
   "default_attributes": {
     "nginx": {
@@ -14,9 +12,13 @@
       "user": "vagrant",
       "group": "vagrant"
     },
+    "mysql": {
+      "root_password": "root"
+    },
     "phalcon": {
       "nginx_user": "vagrant",
-      "nginx_group": "vagrant"
+      "nginx_group": "vagrant",
+      "db_password": "root"
     }
   }
 }

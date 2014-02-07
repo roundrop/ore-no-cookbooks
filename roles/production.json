@@ -2,8 +2,6 @@
   "name": "production",
   "json_class": "Chef::Role",
   "run_list": [
-    "recipe[nginx]",
-    "recipe[nginx::vhost]"
   ],
   "default_attributes": {
     "nginx": {
@@ -13,9 +11,13 @@
       "user": "nginx",
       "group": "nginx"
     },
+    "mysql": {
+      "root_password": "secure_password_here"
+    },
     "phalcon": {
       "nginx_user": "nginx",
-      "nginx_group": "nginx"
+      "nginx_group": "nginx",
+      "db_password": "secure_password_here"
     }
   }
 }
