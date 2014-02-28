@@ -57,6 +57,13 @@ template "#{my_cnf_path}" do
   })
 end
 
+directory '/var/log/mysql/' do
+  mode 0755
+  owner "mysql"
+  group "mysql"
+  action :create
+end
+
 service 'mysql' do
   action [ :enable, :start ]
 end

@@ -17,6 +17,8 @@ default['mysql']['innodb_read_io_threads']          = 4
 default['mysql']['innodb_log_buffer_size']          = 16
 default['mysql']['innodb_log_file_size']            = '64M'
 default['mysql']['innodb_flush_log_at_trx_commit']  = 1
+default['mysql']['general_log']  = 1
+default['mysql']['slow_query_time']  = 1
 
 default['mysql']['root_password']  = 'root'
 

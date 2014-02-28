@@ -12,6 +12,7 @@
       "group": "nginx"
     },
     "mysql": {
+      "general_log": "0",
       "root_password": "secure_password_here"
     },
     "phalcon": {
