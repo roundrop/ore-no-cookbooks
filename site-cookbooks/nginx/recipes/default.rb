@@ -32,10 +32,10 @@ bash "install_nginx" do
     rm -rf pcre-8.32
     wget http://nginx.org/download/nginx-#{nginx_version}.tar.gz
     tar zxf nginx-#{nginx_version}.tar.gz
-    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.32.tar.gz
-    tar -xvf pcre-8.32.tar.gz
+    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.34.tar.gz
+    tar -xvf pcre-8.34.tar.gz
     cd nginx-#{nginx_version}
-    ./configure --prefix=/usr/local --conf-path=/etc/nginx/nginx.conf --user=nginx --group=nginx --with-pcre=/tmp/pcre-8.32
+    ./configure --prefix=/usr/local --conf-path=/etc/nginx/nginx.conf --user=nginx --group=nginx --with-pcre=/tmp/pcre-8.34
     make
     make install
   EOH
