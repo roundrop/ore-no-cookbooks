@@ -20,8 +20,9 @@ bash 'install_phpenv' do
   user 'root'
 
   code <<-EOL
-    curl https://raw.github.com/CHH/phpenv/master/bin/phpenv-install.sh | sh
-    mv ~/.phpenv /usr/local/phpenv
+    rm -rf /usr/local/phpenv
+    curl https://raw.githubusercontent.com/CHH/phpenv/master/bin/phpenv-install.sh | sh
+    mv -f ~/.phpenv /usr/local/phpenv
     chmod 775 -R /usr/local/phpenv
     echo 'export PHPENV_ROOT="/usr/local/phpenv"' >> /etc/profile.d/rbenv.sh.tmp
     echo 'export PATH="$PHPENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh.tmp

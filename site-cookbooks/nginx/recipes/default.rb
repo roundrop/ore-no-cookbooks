@@ -1,5 +1,6 @@
 nginx_version = node['nginx']['version']
 nginx_user = node['nginx']['user']
+pcre_version = node['nginx']['pcre_version']
 
 if "#{nginx_user}" != 'vagrant'
   group 'nginx' do
@@ -26,16 +27,14 @@ bash "install_nginx" do
   cwd "/tmp"
   flags "-e"
   code <<-EOH
-    rm -rf nginx-#{nginx_version}.tar.gz
-    rm -rf nginx-#{nginx_version}
-    rm -rf pcre-8.32.tar.gz
-    rm -rf pcre-8.32
+    rm -rf nginx-*
+    rm -rf pcre-*
     wget http://nginx.org/download/nginx-#{nginx_version}.tar.gz
     tar zxf nginx-#{nginx_version}.tar.gz
-    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.34.tar.gz
-    tar -xvf pcre-8.34.tar.gz
+    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-#{pcre_version}.tar.gz
+    tar -xvf pcre-#{pcre_version}.tar.gz
     cd nginx-#{nginx_version}
-    ./configure --prefix=/usr/local --conf-path=/etc/nginx/nginx.conf --user=nginx --group=nginx --with-pcre=/tmp/pcre-8.34
+    ./configure --prefix=/usr/local --conf-path=/etc/nginx/nginx.conf --user=#{nginx_user} --group=#{nginx_user} --with-pcre=/tmp/pcre-#{pcre_version}
     make
     make install
   EOH
